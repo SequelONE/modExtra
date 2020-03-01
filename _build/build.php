@@ -168,6 +168,71 @@ class modExtraPackage
         $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' System Settings');
     }
 
+    /**
+     * Add settings update
+     */
+    protected function settingsupd()
+    {
+        /** @noinspection PhpIncludeInspection */
+        $settingsupd = include($this->config['elements'] . 'settingsupd.php');
+        if (!is_array($settingsupd)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in Update System Settings');
+
+            return;
+        }
+        $attributes = [
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => !empty($this->config['update']['settingsupd']),
+            xPDOTransport::RELATED_OBJECTS => false,
+        ];
+        foreach ($settingsupd as $name => $data) {
+            /** @var modSystemSetting $settingupd */
+            $settingupd = $this->modx->newObject('modSystemSetting');
+            $settingupd->fromArray(array_merge([
+                'key' => $name,
+                'namespace' => @$data['namespace'],
+                'area' => @$data['area']
+            ], $data), '', true, true);
+            $vehicle = $this->builder->createVehicle($settingupd, $attributes);
+            $this->builder->putVehicle($vehicle);
+        }
+        $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settingsupd) . ' Update System Settings');
+    }
+
+    /**
+     * Add sources
+     */
+    protected function sources()
+    {
+        /** @noinspection PhpIncludeInspection */
+        $sources = include($this->config['elements'] . 'sources.php');
+        if (!is_array($sources)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in Sources');
+
+            return;
+        }
+        $attributes = [
+            xPDOTransport::UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => !empty($this->config['update']['sources']),
+            xPDOTransport::RELATED_OBJECTS => true,
+        ];
+        foreach ($sources as $name => $data) {
+            /** @var modMediaSource $source */
+            $source = $this->modx->newObject('modMediaSource');
+            $source->fromArray(array_merge([
+                'name' => $name,
+                'description' => 'Template Default',
+                'class_key' => $data['class_key'],
+                'properties' => $data['properties'],
+                'is_stream' => 1,
+            ], $data), '', true, true);
+            $vehicle = $this->builder->createVehicle($source, $attributes);
+            $this->builder->putVehicle($vehicle);
+        }
+        $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($sources) . ' Media Sources');
+    }
 
     /**
      * Add menus

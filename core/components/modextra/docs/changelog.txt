@@ -1,5 +1,10 @@
 Changelog for modExtra.
 
+2.0.2-pl
+==============
+- Updated system settings.
+- Added source "modMediaSource".
+
 2.0.1-pl
 ==============
 - Added setting install of default events "modEvent".

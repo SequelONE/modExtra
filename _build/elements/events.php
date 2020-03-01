@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'esourceOnSave' => [
+	'ResourceOnSave' => [
 	    'name' => 'modExtraResourceOnSave',
         'service' => 6,
         'groupname' => 'modextra',
