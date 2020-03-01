@@ -34,6 +34,7 @@ class modExtraPackage
         $root = dirname(dirname(__FILE__)) . '/';
         $assets = $root . 'assets/components/' . $config['name_lower'] . '/';
         $core = $root . 'core/components/' . $config['name_lower'] . '/';
+        $templates = $root . 'assets/templates/default/';
 
         $this->config = array_merge([
             'log_level' => modX::LOG_LEVEL_INFO,
@@ -43,7 +44,7 @@ class modExtraPackage
             'build' => $root . '_build/',
             'elements' => $root . '_build/elements/',
             'resolvers' => $root . '_build/resolvers/',
-
+            'templates' => $templates,
             'assets' => $assets,
             'core' => $core,
         ], $config);
@@ -233,6 +234,8 @@ class modExtraPackage
         }
         $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($sources) . ' Media Sources');
     }
+
+
 
     /**
      * Add menus
@@ -516,12 +519,13 @@ class modExtraPackage
             /** @var modTemplate[] $objects */
             $objects[$name] = $this->modx->newObject('modTemplate');
             $objects[$name]->fromArray(array_merge([
+                'id' => @$data['id'],
                 'templatename' => $name,
-                'description' => $data['description'],
-                'content' => $this::_getContent($this->config['core'] . 'elements/templates/' . $data['file'] . '.tpl'),
+                /*'description' => $data['description'],*/
+                /*'content' => $this::_getContent($this->config['core'] . 'elements/templates/' . $data['file'] . '.tpl'),*/
                 'static' => !empty($this->config['static']['templates']),
                 'source' => 1,
-                'static_file' => 'core/components/' . $this->config['name_lower'] . '/elements/templates/' . $data['file'] . '.tpl',
+                /*'static_file' => 'core/components/' . $this->config['name_lower'] . '/elements/templates/' . $data['file'] . '.tpl',*/
             ], $data), '', true, true);
         }
         $this->category->addMany($objects);
@@ -797,6 +801,10 @@ class modExtraPackage
         $vehicle->resolve('file', [
             'source' => $this->config['assets'],
             'target' => "return MODX_ASSETS_PATH . 'components/';",
+        ]);
+        $vehicle->resolve('file', [
+            'source' => $this->config['templates'],
+            'target' => "return MODX_ASSETS_PATH . 'templates/';",
         ]);
 
         // Add resolvers into vehicle

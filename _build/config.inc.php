@@ -11,7 +11,7 @@ if (!defined('MODX_CORE_PATH')) {
 return [
     'name' => 'modExtra',
     'name_lower' => 'modextra',
-    'version' => '2.0.2',
+    'version' => '2.0.3',
     'release' => 'pl',
     // Install package to site right after build
     'install' => true,
@@ -19,18 +19,18 @@ return [
     'update' => [
         'chunks' => false,
         'menus' => true,
-        'permission' => true,
-        'plugins' => true,
-        'policies' => true,
-        'policy_templates' => true,
+        'permission' => false,
+        'plugins' => false,
+        'policies' => false,
+        'policy_templates' => false,
         'resources' => false,
         'settings' => false,
         'snippets' => true,
-        'templates' => false,
+        'templates' => true,
         'widgets' => false,
         'events' => false,
         'settingsupd' => true,
-        'sources' => true,
+        'sources' => false,
     ],
     // Which elements should be static by default
     'static' => [

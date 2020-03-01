@@ -1,0 +1,1 @@
+                            <li class="[[+disabled]]"><input type="checkbox" name="[[+filter_key]]" id="mse2_[[+table]][[+delimeter]][[+filter]]_[[+idx]]" value="[[+value]]" [[+checked]] [[+disabled]]/> [[+title]] <span class="badge">[[+num]]</span></li>

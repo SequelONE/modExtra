@@ -1,0 +1,1 @@
+<li><a href="#{$alias}" {if $id==20}class="active show"{/if} id="pills-hosting-tab" data-toggle="pill" role="tab" aria-controls="{$alias}" aria-selected="true" {$attributes}>{$menutitle}</a></li>

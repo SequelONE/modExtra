@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.3-pl
+==============
+- Added static templates.
+
 2.0.2-pl
 ==============
 - Updated system settings.
