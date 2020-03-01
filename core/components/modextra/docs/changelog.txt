@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.1-pl
+==============
+- Added setting install of default events "modEvent".
+
 2.0.0-pl
 ==============
 - New build script.
