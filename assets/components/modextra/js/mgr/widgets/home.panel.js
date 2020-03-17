@@ -29,6 +29,16 @@ modExtra.panel.Home = function (config) {
                     xtype: 'modextra-grid-items',
                     cls: 'main-wrapper',
                 }]
+            }, {
+                title: _('modextra_categories'),
+                layout: 'anchor',
+                items: [{
+                    html: _('modextra_intro_msg'),
+                    cls: 'panel-desc',
+                }, {
+                    xtype: 'modextra-grid-categories',
+                    cls: 'main-wrapper',
+                }]
             }]
         }]
     });

@@ -33,10 +33,15 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $query = trim($this->getProperty('query'));
+
+        $c->leftJoin('modExtraCategories', 'modExtraCategories', 'modExtraCategories.id = modExtraItem.category_id');
+        $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
+        $c->select(array('modExtraCategories.name as category_name'));
+
         if ($query) {
             $c->where([
                 'name:LIKE' => "%{$query}%",
-                'OR:description:LIKE' => "%{$query}%",
+                'OR:category_id:LIKE' => "%{$query}%"
             ]);
         }
 

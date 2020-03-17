@@ -36,6 +36,18 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
             height: 150,
             anchor: '99%'
         }, {
+            xtype: 'modextra-combo-database',
+            fieldLabel: _('modextra_item_database'),
+            name: 'supports_db',
+            id: config.id + '-supports_db',
+            anchor: '99%',
+            allowBlank: true,
+        }, {
+            xtype: 'modextra-combo-category',
+            fieldLabel: _('modextra_item_category'),
+            anchor: '99%',
+            allowBlank: true,
+        }, {
             xtype: 'xcheckbox',
             boxLabel: _('modextra_item_active'),
             name: 'active',
@@ -92,6 +104,18 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
             id: config.id + '-description',
             anchor: '99%',
             height: 150,
+        }, {
+            xtype: 'modextra-combo-database',
+            fieldLabel: _('modextra_item_database'),
+            name: 'supports_db',
+            id: config.id + '-supports_db',
+            anchor: '99%',
+            allowBlank: true,
+        }, {
+            xtype: 'modextra-combo-category',
+            fieldLabel: _('modextra_item_category'),
+            anchor: '99%',
+            allowBlank: true,
         }, {
             xtype: 'xcheckbox',
             boxLabel: _('modextra_item_active'),

@@ -5,8 +5,25 @@
     <object class="modExtraItem" table="modextra_items" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
         <field key="description" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="category_id" dbtype="int" precision="10" phptype="integer" null="false" />
+        <field key="supports_db" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
         <field key="active" dbtype="tinyint" precision="1" phptype="boolean" null="true" default="1"/>
 
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false"/>
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false"/>
+        </index>
+        <aggregate alias="modExtraCategory" class="modExtraCategory" local="category_id" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="modExtraCategory" table="modextra_categories" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="alias" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="shopcategory" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false"/>
         </index>

@@ -1,8 +1,8 @@
 <?php
-$xpdo_meta_map['modExtraItem']= array (
+$xpdo_meta_map['modExtraCategory']= array (
   'package' => 'modextra',
   'version' => '1.1',
-  'table' => 'modextra_items',
+  'table' => 'modextra_categories',
   'extends' => 'xPDOSimpleObject',
   'tableMeta' => 
   array (
@@ -10,11 +10,12 @@ $xpdo_meta_map['modExtraItem']= array (
   ),
   'fields' => 
   array (
-    'name' => '',
-    'description' => '',
-    'category_id' => NULL,
-    'supports_db' => '',
+    'name' => NULL,
+    'alias' => NULL,
+    'shopcategory' => NULL,
     'active' => 1,
+    'createdby' => NULL,
+    'createdon' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -24,37 +25,41 @@ $xpdo_meta_map['modExtraItem']= array (
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
-      'default' => '',
     ),
-    'description' => 
+    'alias' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'varchar',
+      'precision' => '255',
       'phptype' => 'string',
-      'null' => true,
-      'default' => '',
+      'null' => false,
     ),
-    'category_id' => 
+    'shopcategory' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+    ),
+    'active' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 1,
+    ),
+    'createdby' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
     ),
-    'supports_db' => 
+    'createdon' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '100',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '',
-    ),
-    'active' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'phptype' => 'boolean',
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
       'null' => true,
-      'default' => 1,
     ),
   ),
   'indexes' => 
@@ -90,17 +95,6 @@ $xpdo_meta_map['modExtraItem']= array (
           'null' => false,
         ),
       ),
-    ),
-  ),
-  'aggregates' => 
-  array (
-    'modExtraCategory' => 
-    array (
-      'class' => 'modExtraCategory',
-      'local' => 'category_id',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
     ),
   ),
 );

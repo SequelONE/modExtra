@@ -1,7 +1,7 @@
-modExtra.grid.Items = function (config) {
+modExtra.grid.Categories = function (config) {
     config = config || {};
     if (!config.id) {
-        config.id = 'modextra-grid-items';
+        config.id = 'modextra-grid-categories';
     }
     Ext.applyIf(config, {
         url: modExtra.config.connector_url,
@@ -10,12 +10,12 @@ modExtra.grid.Items = function (config) {
         tbar: this.getTopBar(config),
         sm: new Ext.grid.CheckboxSelectionModel(),
         baseParams: {
-            action: 'mgr/item/getlist'
+            action: 'mgr/category/getlist'
         },
         listeners: {
             rowDblClick: function (grid, rowIndex, e) {
                 var row = grid.store.getAt(rowIndex);
-                this.updateItem(grid, e, row);
+                this.updateCategory(grid, e, row);
             }
         },
         viewConfig: {
@@ -33,8 +33,16 @@ modExtra.grid.Items = function (config) {
         paging: true,
         remoteSort: true,
         autoHeight: true,
+        tpl: new Ext.XTemplate(
+            '<tpl for=".">\
+                <div class="x-combo-list-item">\
+                    <strong>{name}</strong> <sup>({id})</sup>\
+                </div>\
+            </tpl>'
+            ,{compiled: true}
+        )
     });
-    modExtra.grid.Items.superclass.constructor.call(this, config);
+    modExtra.grid.Categories.superclass.constructor.call(this, config);
 
     // Clear selection on grid refresh
     this.store.on('load', function () {
@@ -43,7 +51,7 @@ modExtra.grid.Items = function (config) {
         }
     }, this);
 };
-Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
+Ext.extend(modExtra.grid.Categories, MODx.grid.Grid, {
     windows: {},
 
     getMenu: function (grid, rowIndex) {
@@ -55,9 +63,9 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         this.addContextMenuItem(menu);
     },
 
-    createItem: function (btn, e) {
+    createCategory: function (btn, e) {
         var w = MODx.load({
-            xtype: 'modextra-item-window-create',
+            xtype: 'modextra-category-window-create',
             id: Ext.id(),
             listeners: {
                 success: {
@@ -72,7 +80,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         w.show(e.target);
     },
 
-    updateItem: function (btn, e, row) {
+    updateCategory: function (btn, e, row) {
         if (typeof(row) != 'undefined') {
             this.menu.record = row.data;
         }
@@ -84,14 +92,14 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         MODx.Ajax.request({
             url: this.config.url,
             params: {
-                action: 'mgr/item/get',
+                action: 'mgr/category/get',
                 id: id
             },
             listeners: {
                 success: {
                     fn: function (r) {
                         var w = MODx.load({
-                            xtype: 'modextra-item-window-update',
+                            xtype: 'modextra-category-window-update',
                             id: Ext.id(),
                             record: r,
                             listeners: {
@@ -111,21 +119,21 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         });
     },
 
-    removeItem: function () {
+    removeCategory: function () {
         var ids = this._getSelectedIds();
         if (!ids.length) {
             return false;
         }
         MODx.msg.confirm({
             title: ids.length > 1
-                ? _('modextra_items_remove')
-                : _('modextra_item_remove'),
+                ? _('modextra_categories_remove')
+                : _('modextra_category_remove'),
             text: ids.length > 1
-                ? _('modextra_items_remove_confirm')
-                : _('modextra_item_remove_confirm'),
+                ? _('modextra_categories_remove_confirm')
+                : _('modextra_category_remove_confirm'),
             url: this.config.url,
             params: {
-                action: 'mgr/item/remove',
+                action: 'mgr/category/remove',
                 ids: Ext.util.JSON.encode(ids),
             },
             listeners: {
@@ -139,7 +147,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         return true;
     },
 
-    disableItem: function () {
+    disableCategory: function () {
         var ids = this._getSelectedIds();
         if (!ids.length) {
             return false;
@@ -147,7 +155,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         MODx.Ajax.request({
             url: this.config.url,
             params: {
-                action: 'mgr/item/disable',
+                action: 'mgr/category/disable',
                 ids: Ext.util.JSON.encode(ids),
             },
             listeners: {
@@ -160,7 +168,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         })
     },
 
-    enableItem: function () {
+    enableCategory: function () {
         var ids = this._getSelectedIds();
         if (!ids.length) {
             return false;
@@ -168,7 +176,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         MODx.Ajax.request({
             url: this.config.url,
             params: {
-                action: 'mgr/item/enable',
+                action: 'mgr/category/enable',
                 ids: Ext.util.JSON.encode(ids),
             },
             listeners: {
@@ -182,56 +190,70 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
     },
 
     getFields: function () {
-        return ['id', 'name', 'description', 'supports_db', 'category_name', 'active', 'actions'];
+        return ['id', 'name', 'alias', 'shopcategory_name', 'active', 'actions'];
     },
 
     getColumns: function () {
         return [{
-            header: _('modextra_item_id'),
+            header: _('modextra_category_id'),
             dataIndex: 'id',
             sortable: true,
             width: 70
         }, {
-            header: _('modextra_item_name'),
+            header: _('modextra_category_name'),
             dataIndex: 'name',
             sortable: true,
             width: 200,
         }, {
-            header: _('modextra_item_database'),
-            dataIndex: 'supports_db',
-            sortable: false,
-            width: 150,
+            header: _('modextra_category_alias'),
+            dataIndex: 'alias',
+            sortable: true,
+            width: 200,
         }, {
-            header: _('modextra_item_description'),
-            dataIndex: 'description',
-            sortable: false,
-            width: 250,
+            header: _('modextra_category_shopcategory'),
+            dataIndex: 'shopcategory_name',
+            sortable: true,
+            width: 200,
         }, {
-            header: _('modextra_item_category'),
-            dataIndex: 'category_name',
-            sortable: false,
-            width: 250,
-        }, {
-            header: _('modextra_item_active'),
+            header: _('modextra_category_active'),
             dataIndex: 'active',
             renderer: modExtra.utils.renderBoolean,
             sortable: true,
-            width: 100,
+            width: 50,
         }, {
             header: _('modextra_grid_actions'),
             dataIndex: 'actions',
             renderer: modExtra.utils.renderActions,
             sortable: false,
-            width: 100,
+            width: 70,
             id: 'actions'
         }];
     },
 
     getTopBar: function () {
         return [{
-            text: '<i class="icon icon-plus"></i>&nbsp;' + _('modextra_item_create'),
-            handler: this.createItem,
-            scope: this
+            text: '<i class="icon icon-cogs"></i> ',
+            menu: [{
+                text: '<i class="icon icon-plus"></i> ' + _('modextra_category_create'),
+                cls: 'modextra-cogs',
+                handler: this.createCategory,
+                scope: this
+            }, {
+                text: '<i class="icon icon-trash-o red"></i> ' + _('modextra_category_remove'),
+                cls: 'modextra-cogs',
+                handler: this.removeCategory,
+                scope: this
+            }, {
+                text: '<i class="icon icon-toggle-on green"></i> ' + _('modextra_category_enable'),
+                cls: 'modextra-cogs',
+                handler: this.enableCategory,
+                scope: this
+            }, {
+                text: '<i class="icon icon-toggle-off red"></i> ' + _('modextra_category_disable'),
+                cls: 'modextra-cogs',
+                handler: this.disableCategory,
+                scope: this
+            }]
         }, '->', {
             xtype: 'modextra-field-search',
             width: 250,
@@ -294,4 +316,4 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         this.getBottomToolbar().changePage(1);
     },
 });
-Ext.reg('modextra-grid-items', modExtra.grid.Items);
+Ext.reg('modextra-grid-categories', modExtra.grid.Categories);

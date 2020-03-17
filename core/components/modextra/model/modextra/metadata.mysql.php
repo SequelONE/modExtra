@@ -4,5 +4,6 @@ $xpdo_meta_map = array (
   'xPDOSimpleObject' => 
   array (
     0 => 'modExtraItem',
+    1 => 'modExtraCategory',
   ),
 );

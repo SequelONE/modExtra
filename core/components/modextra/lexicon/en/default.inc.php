@@ -8,6 +8,8 @@ $_lang['modextra_intro_msg'] = 'You can select multiple items by holding Shift o
 $_lang['modextra_items'] = 'Items';
 $_lang['modextra_item_id'] = 'Id';
 $_lang['modextra_item_name'] = 'Name';
+$_lang['modextra_item_category'] = 'Category';
+$_lang['modextra_item_database'] = 'Database';
 $_lang['modextra_item_description'] = 'Description';
 $_lang['modextra_item_active'] = 'Active';
 
@@ -31,3 +33,32 @@ $_lang['modextra_item_err_save'] = 'An error occurred while trying to save the I
 
 $_lang['modextra_grid_search'] = 'Search';
 $_lang['modextra_grid_actions'] = 'Actions';
+
+// Categories
+$_lang['modextra_categories'] = 'Categories';
+$_lang['modextra_category_id'] = 'Id';
+$_lang['modextra_category_name'] = 'Name';
+$_lang['modextra_category_description'] = 'Description';
+$_lang['modextra_category_shopcategory'] = 'Category shop';
+$_lang['modextra_category_source'] = 'File source';
+$_lang['modextra_category_active'] = 'Active';
+
+$_lang['modextra_category_create'] = 'Create Category';
+$_lang['modextra_category_update'] = 'Update Category';
+$_lang['modextra_category_enable'] = 'Enable Category';
+$_lang['modextra_categories_enable'] = 'Enable Categories';
+$_lang['modextra_category_disable'] = 'Disable Category';
+$_lang['modextra_categories_disable'] = 'Disable Categories';
+$_lang['modextra_category_remove'] = 'Remove Category';
+$_lang['modextra_categories_remove'] = 'Remove Categories';
+$_lang['modextra_category_remove_confirm'] = 'Are you sure you want to remove this Category?';
+$_lang['modextra_categories_remove_confirm'] = 'Are you sure you want to remove this Categories?';
+$_lang['modextra_category_active'] = 'Active';
+$_lang['modextra_category_repository'] = 'Repository';
+
+$_lang['modextra_category_err_name'] = 'You must specify the name of Category.';
+$_lang['modextra_category_err_ae'] = 'An Category already exists with that name.';
+$_lang['modextra_category_err_nf'] = 'Category not found.';
+$_lang['modextra_category_err_ns'] = 'Category not specified.';
+$_lang['modextra_category_err_remove'] = 'An error occurred while trying to remove the Category.';
+$_lang['modextra_category_err_save'] = 'An error occurred while trying to save the Category.';

@@ -11,10 +11,12 @@ $packages = [
     'Ace' => [
         'version' => '1.6.5-pl',
         'service_url' => 'modstore.pro',
+        'checked'   => true,
     ],
     'pdoTools' => [
         'version' => '2.10.0-pl',
         'service_url' => 'modstore.pro',
+        'checked'   => true,
     ],
 ];
 
@@ -162,5 +164,4 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $success = true;
         break;
 }
-
 return $success;
