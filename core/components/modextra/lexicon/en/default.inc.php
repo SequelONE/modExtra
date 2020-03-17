@@ -41,6 +41,7 @@ $_lang['modextra_grid_actions'] = 'Actions';
 $_lang['modextra_categories'] = 'Categories';
 $_lang['modextra_category_id'] = 'Id';
 $_lang['modextra_category_name'] = 'Name';
+$_lang['modextra_category_alias'] = 'Alias';
 $_lang['modextra_category_description'] = 'Description';
 $_lang['modextra_category_shopcategory'] = 'Category shop';
 $_lang['modextra_category_source'] = 'File source';

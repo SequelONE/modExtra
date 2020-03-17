@@ -42,6 +42,7 @@ $_lang['modextra_grid_actions'] = 'Действия';
 $_lang['modextra_categories'] = 'Категории';
 $_lang['modextra_category_id'] = 'Id';
 $_lang['modextra_category_name'] = 'Название';
+$_lang['modextra_category_alias'] = 'Псевдоним';
 $_lang['modextra_category_description'] = 'Описание';
 $_lang['modextra_category_shopcategory'] = 'Категория магазина';
 $_lang['modextra_category_source'] = 'Источник файлов';
