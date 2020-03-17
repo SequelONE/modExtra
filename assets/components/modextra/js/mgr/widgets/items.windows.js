@@ -5,7 +5,7 @@ modExtra.window.CreateItem = function (config) {
     }
     Ext.applyIf(config, {
         title: _('modextra_item_create'),
-        width: 700,
+        width: 675,
         autoHeight: true,
         url: modExtra.config.connector_url,
         action: 'mgr/item/create',
@@ -26,12 +26,34 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
 
     getFields: function (config) {
         return [{
-            xtype: 'textfield',
-            fieldLabel: _('modextra_item_name'),
-            name: 'name',
-            id: config.id + '-name',
+            layout: 'column',
+            border: false,
             anchor: '99%',
-            allowBlank: false,
+            items: [{
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'textfield',
+                    fieldLabel: _('modextra_item_name'),
+                    name: 'name',
+                    id: config.id + '-name',
+                    anchor: '99%',
+                    allowBlank: false,
+                }],
+            }, {
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'modextra-combo-category',
+                    fieldLabel: _('modextra_item_category'),
+                    anchor: '99%',
+                    allowBlank: true,
+                }],
+            }]
         }, {
             xtype: 'modx-combo-browser',
             fieldLabel: _('modextra_item_image'),
@@ -60,24 +82,36 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
             anchor: '99%',
             allowBlank: true,
         }, {
-            xtype: 'modextra-combo-category',
-            fieldLabel: _('modextra_item_category'),
+            layout: 'column',
+            border: false,
             anchor: '99%',
-            allowBlank: true,
-        }, {
-            xtype: 'modextra-combo-user',
-            fieldLabel: _('modextra_item_user'),
-            name: 'createdby',
-            id: config.id + '-createdby',
-            anchor: '99%',
-            allowBlank: true,
-        }, {
-            xtype: 'modextra-combo-dates',
-            fieldLabel: _('modextra_item_createdon'),
-            name: 'createdon',
-            id: config.id + '-createdon',
-            anchor: '99%',
-            allowBlank: true,
+            items: [{
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'modextra-combo-user',
+                    fieldLabel: _('modextra_item_user'),
+                    name: 'createdby',
+                    id: config.id + '-createdby',
+                    anchor: '99%',
+                    allowBlank: true,
+                }],
+            }, {
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'modextra-combo-dates',
+                    fieldLabel: _('modextra_item_createdon'),
+                    name: 'createdon',
+                    id: config.id + '-createdon',
+                    anchor: '99%',
+                    allowBlank: true,
+                }],
+            }],
         }, {
             xtype: 'xcheckbox',
             boxLabel: _('modextra_item_active'),
@@ -101,7 +135,7 @@ modExtra.window.UpdateItem = function (config) {
     }
     Ext.applyIf(config, {
         title: _('modextra_item_update'),
-        width: 700,
+        width: 675,
         autoHeight: true,
         url: modExtra.config.connector_url,
         action: 'mgr/item/update',
@@ -126,12 +160,34 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
             name: 'id',
             id: config.id + '-id',
         }, {
-            xtype: 'textfield',
-            fieldLabel: _('modextra_item_name'),
-            name: 'name',
-            id: config.id + '-name',
+            layout: 'column',
+            border: false,
             anchor: '99%',
-            allowBlank: false,
+            items: [{
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'textfield',
+                    fieldLabel: _('modextra_item_name'),
+                    name: 'name',
+                    id: config.id + '-name',
+                    anchor: '99%',
+                    allowBlank: false,
+                }],
+            }, {
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'modextra-combo-category',
+                    fieldLabel: _('modextra_item_category'),
+                    anchor: '99%',
+                    allowBlank: true,
+                }],
+            }],
         }, {
             xtype: 'modx-combo-browser',
             fieldLabel: _('modextra_item_image'),
@@ -160,24 +216,36 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
             anchor: '99%',
             allowBlank: true,
         }, {
-            xtype: 'modextra-combo-category',
-            fieldLabel: _('modextra_item_category'),
+            layout: 'column',
+            border: false,
             anchor: '99%',
-            allowBlank: true,
-        }, {
-            xtype: 'modextra-combo-user',
-            fieldLabel: _('modextra_item_user'),
-            name: 'createdby',
-            id: config.id + '-createdby',
-            anchor: '99%',
-            allowBlank: true,
-        }, {
-            xtype: 'modextra-combo-dates',
-            fieldLabel: _('modextra_item_createdon'),
-            name: 'createdon',
-            id: config.id + '-createdon',
-            anchor: '99%',
-            allowBlank: true,
+            items: [{
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'modextra-combo-user',
+                    fieldLabel: _('modextra_item_user'),
+                    name: 'createdby',
+                    id: config.id + '-createdby',
+                    anchor: '99%',
+                    allowBlank: true,
+                }],
+            }, {
+                columnWidth: .50,
+                layout: 'form',
+                defaults: {msgTarget: 'under'},
+                border: false,
+                items: [{
+                    xtype: 'modextra-combo-dates',
+                    fieldLabel: _('modextra_item_createdon'),
+                    name: 'createdon',
+                    id: config.id + '-createdon',
+                    anchor: '99%',
+                    allowBlank: true,
+                }],
+            }],
         }, {
             xtype: 'xcheckbox',
             boxLabel: _('modextra_item_active'),

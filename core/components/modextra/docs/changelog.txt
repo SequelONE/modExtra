@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.9-pl
+==============
+- Edited window modal with editing item
+
 2.0.8-pl
 ==============
 - Added setting with type source.

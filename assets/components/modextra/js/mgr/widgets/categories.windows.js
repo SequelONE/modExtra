@@ -96,12 +96,12 @@ Ext.extend(modExtra.window.UpdateCategory, MODx.Window, {
             name: 'alias',
             id: config.id + '-alias',
             anchor: '99%',
-            allowBlank: false,
+            allowBlank: true,
         }, {
             xtype: 'modextra-combo-shopcategory',
             fieldLabel: _('modextra_category_shopcategory'),
             anchor: '99%',
-            allowBlank: false,
+            allowBlank: true,
         }, {
             xtype: 'xcheckbox',
             boxLabel: _('modextra_category_active'),

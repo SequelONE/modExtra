@@ -161,6 +161,8 @@ class modExtraPackage
             $setting = $this->modx->newObject('modSystemSetting');
             $setting->fromArray(array_merge([
                 'key' => $this->config['name_lower'] . '_' . $name,
+                'name' => 'setting_' . $this->config['name_lower'] . '_' . $name,
+                'description' => 'setting_' . $this->config['name_lower'] . '_' . $name . '_desc',
                 'namespace' => $this->config['name_lower'],
             ], $data), '', true, true);
             $vehicle = $this->builder->createVehicle($setting, $attributes);
@@ -774,6 +776,7 @@ class modExtraPackage
      */
     public function process()
     {
+        $this->modx->addExtensionPackage('modextra', '[[++core_path]]components/' . $this->config['name_lower'] . '/model/');
         $this->model();
         $this->assets();
 

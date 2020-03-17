@@ -34,9 +34,9 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     {
         $query = trim($this->getProperty('query'));
 
-        $c->leftJoin('modExtraCategories', 'modExtraCategories', 'modExtraCategories.id = modExtraItem.category_id');
+        $c->leftJoin('modExtraCategory', 'modExtraCategory', 'modExtraCategory.id = modExtraItem.category_id');
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
-        $c->select(array('modExtraCategories.name as category_name'));
+        $c->select(array('modExtraCategory.name as category_name'));
 
         $c->leftJoin('modUser', 'modUser', 'modUser.id = modExtraItem.createdby');
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
