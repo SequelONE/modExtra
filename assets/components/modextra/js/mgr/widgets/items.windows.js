@@ -5,7 +5,7 @@ modExtra.window.CreateItem = function (config) {
     }
     Ext.applyIf(config, {
         title: _('modextra_item_create'),
-        width: 550,
+        width: 700,
         autoHeight: true,
         url: modExtra.config.connector_url,
         action: 'mgr/item/create',
@@ -17,6 +17,10 @@ modExtra.window.CreateItem = function (config) {
         }]
     });
     modExtra.window.CreateItem.superclass.constructor.call(this, config);
+
+    this.on('activate',function(w,e) {
+        MODx.loadRTE(config.id + '-description');
+    },this);
 };
 Ext.extend(modExtra.window.CreateItem, MODx.Window, {
 
@@ -42,7 +46,12 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
             name: 'description',
             id: config.id + '-description',
             height: 150,
-            anchor: '99%'
+            anchor: '99%',
+            listeners: {
+                render: function () {
+                    MODx.loadRTE("description");
+                }
+            }
         }, {
             xtype: 'modextra-combo-database',
             fieldLabel: _('modextra_item_database'),
@@ -92,7 +101,7 @@ modExtra.window.UpdateItem = function (config) {
     }
     Ext.applyIf(config, {
         title: _('modextra_item_update'),
-        width: 550,
+        width: 700,
         autoHeight: true,
         url: modExtra.config.connector_url,
         action: 'mgr/item/update',
@@ -104,6 +113,10 @@ modExtra.window.UpdateItem = function (config) {
         }]
     });
     modExtra.window.UpdateItem.superclass.constructor.call(this, config);
+
+    this.on('activate',function(w,e) {
+        MODx.loadRTE(config.id + '-description');
+    },this);
 };
 Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
 
@@ -134,6 +147,11 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
             id: config.id + '-description',
             anchor: '99%',
             height: 150,
+            listeners: {
+                render: function () {
+                    MODx.loadRTE("description");
+                }
+            }
         }, {
             xtype: 'modextra-combo-database',
             fieldLabel: _('modextra_item_database'),

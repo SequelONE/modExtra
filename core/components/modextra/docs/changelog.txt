@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.7-pl
+==============
+- Added TinyMCE in field description.
+
 2.0.6-pl
 ==============
 - Added topBar.

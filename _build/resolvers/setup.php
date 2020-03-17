@@ -9,13 +9,18 @@ if (!$transport->xpdo || !($transport instanceof xPDOTransport)) {
 $modx =& $transport->xpdo;
 $packages = [
     'Ace' => [
-        'version' => '1.6.5-pl',
+        'version' => '1.8.0-pl',
         'service_url' => 'modstore.pro',
         'checked'   => true,
     ],
     'pdoTools' => [
-        'version' => '2.10.0-pl',
+        'version' => '2.12.6-pl',
         'service_url' => 'modstore.pro',
+        'checked'   => true,
+    ],
+    'TinyMCE' => [
+        'version' => '4.3.4-pl',
+        'service_url' => 'modx.com',
         'checked'   => true,
     ],
 ];
