@@ -35,6 +35,7 @@ class modExtraPackage
         $assets = $root . 'assets/components/' . $config['name_lower'] . '/';
         $core = $root . 'core/components/' . $config['name_lower'] . '/';
         $templates = $root . 'assets/templates/default/';
+        $images = $root . 'assets/images/uploads/';
 
         $this->config = array_merge([
             'log_level' => modX::LOG_LEVEL_INFO,
@@ -45,6 +46,7 @@ class modExtraPackage
             'elements' => $root . '_build/elements/',
             'resolvers' => $root . '_build/resolvers/',
             'templates' => $templates,
+            'images' => $images,
             'assets' => $assets,
             'core' => $core,
         ], $config);
@@ -808,6 +810,10 @@ class modExtraPackage
         $vehicle->resolve('file', [
             'source' => $this->config['templates'],
             'target' => "return MODX_ASSETS_PATH . 'templates/';",
+        ]);
+        $vehicle->resolve('file', [
+            'source' => $this->config['images'],
+            'target' => "return MODX_ASSETS_PATH . 'images/';",
         ]);
 
         // Add resolvers into vehicle

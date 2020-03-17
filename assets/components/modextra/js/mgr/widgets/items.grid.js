@@ -195,17 +195,20 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             header: _('modextra_item_image'),
             dataIndex: 'image',
             sortable: true,
-            width: 50,
+            width: 100,
             renderer: function(value){
-                if(value)
+                if(value) {
                     return '<img width="50" src="/' + value + '">';
+                } else {
+                    return '<img width="50" src="/assets/images/uploads/noimage.png">';
+                }
             },
             editor: { xtype: 'modx-combo-browser' }
         }, {
             header: _('modextra_item_name'),
             dataIndex: 'name',
             sortable: true,
-            width: 200,
+            width: 150,
         }, {
             header: _('modextra_item_database'),
             dataIndex: 'supports_db',
