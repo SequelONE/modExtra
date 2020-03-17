@@ -13,6 +13,7 @@ $_lang['modextra_item_category'] = 'Category';
 $_lang['modextra_item_database'] = 'Database';
 $_lang['modextra_item_description'] = 'Description';
 $_lang['modextra_item_user'] = 'User';
+$_lang['modextra_item_createdon'] = 'Created';
 $_lang['modextra_item_active'] = 'Active';
 
 $_lang['modextra_item_create'] = 'Create Item';

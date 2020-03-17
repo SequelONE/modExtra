@@ -1,5 +1,10 @@
 Changelog for modExtra.
 
+2.0.6-pl
+==============
+- Added topBar.
+- Added Date in window modal and in grid table.
+
 2.0.5-pl
 ==============
 - Added Users from modUser.

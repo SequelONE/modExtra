@@ -13,6 +13,7 @@ $_lang['modextra_item_category'] = 'Категория';
 $_lang['modextra_item_database'] = 'База данных';
 $_lang['modextra_item_description'] = 'Описание';
 $_lang['modextra_item_user'] = 'Пользователь';
+$_lang['modextra_item_createdon'] = 'Создано';
 $_lang['modextra_item_active'] = 'Активно';
 
 $_lang['modextra_item_create'] = 'Создать предмет';

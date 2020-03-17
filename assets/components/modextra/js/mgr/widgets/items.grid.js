@@ -182,7 +182,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
     },
 
     getFields: function () {
-        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name', 'active', 'actions'];
+        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name',  'createdon', 'active', 'actions'];
     },
 
     getColumns: function () {
@@ -220,12 +220,18 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             header: _('modextra_item_category'),
             dataIndex: 'category_name',
             sortable: false,
-            width: 250,
+            width: 150,
         }, {
             header: _('modextra_item_user'),
             dataIndex: 'createdby_name',
             sortable: false,
             width: 100,
+        }, {
+            header: _('modextra_item_createdon'),
+            dataIndex: 'createdon',
+            sortable: true,
+            width: 200,
+            renderer: modExtra.utils.renderDateTime,
         }, {
             header: _('modextra_item_active'),
             dataIndex: 'active',
@@ -244,9 +250,28 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
 
     getTopBar: function () {
         return [{
-            text: '<i class="icon icon-plus"></i>&nbsp;' + _('modextra_item_create'),
-            handler: this.createItem,
-            scope: this
+            text: '<i class="icon icon-cogs"></i> ',
+            menu: [{
+                text: '<i class="icon icon-plus"></i> ' + _('modextra_item_create'),
+                cls: 'modextra-cogs',
+                handler: this.createItem,
+                scope: this
+            }, {
+                text: '<i class="icon icon-trash-o red"></i> ' + _('modextra_item_remove'),
+                cls: 'modextra-cogs',
+                handler: this.removeItem,
+                scope: this
+            }, {
+                text: '<i class="icon icon-toggle-on green"></i> ' + _('modextra_item_enable'),
+                cls: 'modextra-cogs',
+                handler: this.enableItem,
+                scope: this
+            }, {
+                text: '<i class="icon icon-toggle-off red"></i> ' + _('modextra_item_disable'),
+                cls: 'modextra-cogs',
+                handler: this.disableItem,
+                scope: this
+            }]
         }, '->', {
             xtype: 'modextra-field-search',
             width: 250,

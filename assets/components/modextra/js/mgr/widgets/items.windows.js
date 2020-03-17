@@ -63,6 +63,13 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
             anchor: '99%',
             allowBlank: true,
         }, {
+            xtype: 'modextra-combo-dates',
+            fieldLabel: _('modextra_item_createdon'),
+            name: 'createdon',
+            id: config.id + '-createdon',
+            anchor: '99%',
+            allowBlank: true,
+        }, {
             xtype: 'xcheckbox',
             boxLabel: _('modextra_item_active'),
             name: 'active',
@@ -144,6 +151,13 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
             fieldLabel: _('modextra_item_user'),
             name: 'createdby',
             id: config.id + '-createdby',
+            anchor: '99%',
+            allowBlank: true,
+        }, {
+            xtype: 'modextra-combo-dates',
+            fieldLabel: _('modextra_item_createdon'),
+            name: 'createdon',
+            id: config.id + '-createdon',
             anchor: '99%',
             allowBlank: true,
         }, {
