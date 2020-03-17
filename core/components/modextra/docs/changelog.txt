@@ -1,8 +1,13 @@
 Changelog for modExtra.
 
+2.0.5-pl
+==============
+- Added Users from modUser.
+- Added image in grid table and upload image in window modal.
+
 2.0.4-pl
 ==============
-- Added Categories on miniShop2.
+- Added Categories from miniShop2.
 - Added Categories in Grid-table.
 - Added fields with type select
 

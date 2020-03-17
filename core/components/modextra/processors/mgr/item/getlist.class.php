@@ -38,6 +38,10 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
         $c->select(array('modExtraCategories.name as category_name'));
 
+        $c->leftJoin('modUser', 'modUser', 'modUser.id = modExtraItem.createdby');
+        $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
+        $c->select(array('modUser.username as createdby_name'));
+
         if ($query) {
             $c->where([
                 'name:LIKE' => "%{$query}%",

@@ -8,9 +8,11 @@ $_lang['modextra_intro_msg'] = 'Вы можете выделять сразу н
 $_lang['modextra_items'] = 'Предметы';
 $_lang['modextra_item_id'] = 'Id';
 $_lang['modextra_item_name'] = 'Название';
+$_lang['modextra_item_image'] = 'Изображение';
 $_lang['modextra_item_category'] = 'Категория';
 $_lang['modextra_item_database'] = 'База данных';
 $_lang['modextra_item_description'] = 'Описание';
+$_lang['modextra_item_user'] = 'Пользователь';
 $_lang['modextra_item_active'] = 'Активно';
 
 $_lang['modextra_item_create'] = 'Создать предмет';

@@ -182,7 +182,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
     },
 
     getFields: function () {
-        return ['id', 'name', 'description', 'supports_db', 'category_name', 'active', 'actions'];
+        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name', 'active', 'actions'];
     },
 
     getColumns: function () {
@@ -191,6 +191,16 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             dataIndex: 'id',
             sortable: true,
             width: 70
+        }, {
+            header: _('modextra_item_image'),
+            dataIndex: 'image',
+            sortable: true,
+            width: 50,
+            renderer: function(value){
+                if(value)
+                    return '<img width="50" src="/' + value + '">';
+            },
+            editor: { xtype: 'modx-combo-browser' }
         }, {
             header: _('modextra_item_name'),
             dataIndex: 'name',
@@ -211,6 +221,11 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             dataIndex: 'category_name',
             sortable: false,
             width: 250,
+        }, {
+            header: _('modextra_item_user'),
+            dataIndex: 'createdby_name',
+            sortable: false,
+            width: 100,
         }, {
             header: _('modextra_item_active'),
             dataIndex: 'active',

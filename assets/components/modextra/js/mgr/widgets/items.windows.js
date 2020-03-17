@@ -29,6 +29,14 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
             anchor: '99%',
             allowBlank: false,
         }, {
+            xtype: 'modx-combo-browser',
+            fieldLabel: _('modextra_item_image'),
+            name: 'image',
+            id: config.id + '-image',
+            source: MODx.config.modextra_source_images || MODx.config.default_media_source,
+            anchor: '99%',
+            allowBlank: true,
+        }, {
             xtype: 'textarea',
             fieldLabel: _('modextra_item_description'),
             name: 'description',
@@ -45,6 +53,13 @@ Ext.extend(modExtra.window.CreateItem, MODx.Window, {
         }, {
             xtype: 'modextra-combo-category',
             fieldLabel: _('modextra_item_category'),
+            anchor: '99%',
+            allowBlank: true,
+        }, {
+            xtype: 'modextra-combo-user',
+            fieldLabel: _('modextra_item_user'),
+            name: 'createdby',
+            id: config.id + '-createdby',
             anchor: '99%',
             allowBlank: true,
         }, {
@@ -98,6 +113,14 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
             anchor: '99%',
             allowBlank: false,
         }, {
+            xtype: 'modx-combo-browser',
+            fieldLabel: _('modextra_item_image'),
+            name: 'image',
+            id: config.id + '-image',
+            source: MODx.config.modextra_source_images || MODx.config.default_media_source,
+            anchor: '99%',
+            allowBlank: true,
+        }, {
             xtype: 'textarea',
             fieldLabel: _('modextra_item_description'),
             name: 'description',
@@ -114,6 +137,13 @@ Ext.extend(modExtra.window.UpdateItem, MODx.Window, {
         }, {
             xtype: 'modextra-combo-category',
             fieldLabel: _('modextra_item_category'),
+            anchor: '99%',
+            allowBlank: true,
+        }, {
+            xtype: 'modextra-combo-user',
+            fieldLabel: _('modextra_item_user'),
+            name: 'createdby',
+            id: config.id + '-createdby',
             anchor: '99%',
             allowBlank: true,
         }, {

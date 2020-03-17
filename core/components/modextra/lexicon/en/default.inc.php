@@ -7,10 +7,12 @@ $_lang['modextra_intro_msg'] = 'You can select multiple items by holding Shift o
 
 $_lang['modextra_items'] = 'Items';
 $_lang['modextra_item_id'] = 'Id';
+$_lang['modextra_item_image'] = 'Image';
 $_lang['modextra_item_name'] = 'Name';
 $_lang['modextra_item_category'] = 'Category';
 $_lang['modextra_item_database'] = 'Database';
 $_lang['modextra_item_description'] = 'Description';
+$_lang['modextra_item_user'] = 'User';
 $_lang['modextra_item_active'] = 'Active';
 
 $_lang['modextra_item_create'] = 'Create Item';

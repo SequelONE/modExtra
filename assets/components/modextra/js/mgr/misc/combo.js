@@ -152,6 +152,26 @@ modExtra.combo.ShopCategory = function (config) {
     });
 };
 Ext.extend(modExtra.combo.ShopCategory, MODx.combo.ComboBox);
+MODx.combo.User = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'createdby',
+        hiddenName: 'createdby',
+        displayField: 'username',
+        valueField: 'id',
+        fields: ['username','id'],
+        pageSize: 20,
+        url: modExtra.config['connector_url'],
+        baseParams: {
+            action: 'mgr/user/getlist',
+        },
+        typeAhead: true,
+        editable: true,
+    });
+    MODx.combo.User.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.User,MODx.combo.ComboBox);
+Ext.reg('modextra-combo-user',MODx.combo.User);
 Ext.reg('modextra-combo-shopcategory', modExtra.combo.ShopCategory);
 Ext.reg('modextra-combo-dates',modExtra.combo.DateTime);
 Ext.reg('modextra-combo-database',modExtra.combo.Database);
