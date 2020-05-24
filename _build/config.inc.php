@@ -11,7 +11,7 @@ if (!defined('MODX_CORE_PATH')) {
 return [
     'name' => 'modExtra',
     'name_lower' => 'modextra',
-    'version' => '2.0.10',
+    'version' => '2.0.11',
     'release' => 'pl',
     // Install package to site right after build
     'install' => true,

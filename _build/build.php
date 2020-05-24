@@ -810,10 +810,12 @@ class modExtraPackage
         $vehicle->resolve('file', [
             'source' => $this->config['templates'],
             'target' => "return MODX_ASSETS_PATH . 'templates/';",
+            xPDOTransport::RESOLVE_FILES_REMOVE => false
         ]);
         $vehicle->resolve('file', [
             'source' => $this->config['images'],
             'target' => "return MODX_ASSETS_PATH . 'images/';",
+            xPDOTransport::RESOLVE_FILES_REMOVE => false
         ]);
 
         // Add resolvers into vehicle
