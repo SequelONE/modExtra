@@ -20,3 +20,7 @@ $_lang['setting_modextra_context'] = 'Контекст';
 $_lang['setting_modextra_context_desc'] = 'Выберите контекст.';
 $_lang['setting_modextra_language'] = 'Язык';
 $_lang['setting_modextra_language_desc'] = 'Выберите язык.';
+
+// Вкладка у ресурса
+$_lang['setting_modextra_resource_templates'] = 'Шаблоны ресурсов';
+$_lang['setting_modextra_resource_templates_desc'] = 'Если пусто - отображается на всех шаблонах.<br>"-" - не отображается нигде.<br>"0" - отображается на пустом шаблоне.<br>"1,2,3" - отображается на шаблонах с id 1,2,3.';

@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.12-pl
+==============
+- Added tab on resources
+
 2.0.11-pl
 ==============
 - Added default icons for templates

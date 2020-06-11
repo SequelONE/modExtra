@@ -5,8 +5,8 @@ return [
         'file' => 'modextra',
         'description' => '',
         'events' => [
-            'OnManagerPageInit' => [],
-            'modExtraResourceOnSave' => [],
+            'OnDocFormRender' => [],
+            'OnEmptyTrash' => [],
         ],
     ],
 ];

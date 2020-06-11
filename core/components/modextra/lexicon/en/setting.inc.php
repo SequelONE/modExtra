@@ -20,3 +20,7 @@ $_lang['setting_modextra_context'] = 'Context';
 $_lang['setting_modextra_context_desc'] = 'Add context.';
 $_lang['setting_modextra_language'] = 'Language';
 $_lang['setting_modextra_language_desc'] = 'Add language.';
+
+// Tab in resource
+$_lang['setting_modextra_resource_templates'] = 'Resource templates';
+$_lang['setting_modextra_resource_templates_desc'] = 'If empty, it is displayed on all templates.<br>"-" - it is not displayed anywhere.<br>"0" - displayed on an empty template.<br>"1,2,3" - displayed on templates with id 1,2,3.';

@@ -67,8 +67,3 @@ $_lang['modextra_category_err_nf'] = 'Категория не найден.';
 $_lang['modextra_category_err_ns'] = 'Категория не указан.';
 $_lang['modextra_category_err_remove'] = 'Ошибка при удалении категории.';
 $_lang['modextra_category_err_save'] = 'Ошибка при сохранении категории.';
-
-// Кнопки
-$_lang['modextra_button_install'] = 'Установить пакет';
-$_lang['modextra_button_download'] = 'Скачать пакет';
-$_lang['modextra_button_download_encryption'] = 'Скачать пакет с шифрацией';

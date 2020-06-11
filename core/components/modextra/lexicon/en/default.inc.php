@@ -66,8 +66,3 @@ $_lang['modextra_category_err_nf'] = 'Category not found.';
 $_lang['modextra_category_err_ns'] = 'Category not specified.';
 $_lang['modextra_category_err_remove'] = 'An error occurred while trying to remove the Category.';
 $_lang['modextra_category_err_save'] = 'An error occurred while trying to save the Category.';
-
-// Кнопки
-$_lang['modextra_button_install'] = 'Install package';
-$_lang['modextra_button_download'] = 'Download package';
-$_lang['modextra_button_download_encryption'] = 'Download package with encryption';
