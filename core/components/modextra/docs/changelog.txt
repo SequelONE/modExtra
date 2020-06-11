@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.13-pl
+==============
+- Added new combobox type select with msProduct
+
 2.0.12-pl
 ==============
 - Added tab on resources

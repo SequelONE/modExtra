@@ -7,6 +7,8 @@
         <field key="image" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="description" dbtype="text" phptype="string" null="true" default=""/>
         <field key="category_id" dbtype="int" precision="10" phptype="integer" null="false" />
+        <field key="product_id" dbtype="int" precision="10" phptype="integer" null="false" />
+        <field key="products" dbtype="text" phptype="json" null="true"/>
         <field key="supports_db" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />

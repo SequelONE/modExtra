@@ -67,3 +67,7 @@ $_lang['modextra_category_err_nf'] = 'Категория не найден.';
 $_lang['modextra_category_err_ns'] = 'Категория не указан.';
 $_lang['modextra_category_err_remove'] = 'Ошибка при удалении категории.';
 $_lang['modextra_category_err_save'] = 'Ошибка при сохранении категории.';
+
+// Товары
+$_lang['modextra_product_name'] = 'Название товара';
+$_lang['modextra_products'] = 'Список товаров';
