@@ -250,13 +250,15 @@ modExtra.combo.Options = function(config) {
         allowAddNewData: true,
         addNewDataOnBlur : true,
         resizable: true,
-        name: config.name || 'products',
+        name: 'products',
+        value:'{products}',
+        dataIndex : 'products',
         anchor:'99%',
-        minChars: 2,
+        minChars: 1,
         fieldLabel: _('ms2_product_name'),
         valueField: 'id',
         displayField: 'pagetitle',
-        hiddenName: 'products',
+        displayFieldTpl: '{pagetitle} (id: {id})',
         url: modExtra.config['connector_url'],
         store:new Ext.data.JsonStore({
             id: (config.name || 'products') + '-store',
@@ -265,10 +267,11 @@ modExtra.combo.Options = function(config) {
             autoSave: false,
             totalProperty:'total',
             fields: ['id', 'pagetitle', 'parents'],
-            url: modExtra.config.connector_url,
+
+            url: modExtra.config['connector_url'],
             baseParams: {
                 action: 'mgr/product/getoptions',
-                value: config.name
+                key: config.name
             },
             tpl: new Ext.XTemplate('\
             <tpl for=".">\
@@ -293,6 +296,9 @@ modExtra.combo.Options = function(config) {
         listeners: {
             newItem: function(bs,v, f) {bs.addItem({products: v});},
         },
+        pageSize: 5,
+        emptyText: _('ms2_combo_select'),
+        editable: true,
         renderTo: Ext.getBody()
     });
     config.name += '[]';
