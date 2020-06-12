@@ -1,5 +1,9 @@
 Changelog for modExtra.
 
+2.0.14-pl
+==============
+- Fixed new combobox type select with msProduct
+
 2.0.13-pl
 ==============
 - Added new combobox type select with msProduct

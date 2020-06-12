@@ -211,8 +211,8 @@ modExtra.combo.Product = function (config) {
         fields: ['id', 'pagetitle', 'parents'],
         valueField: 'id',
         displayField: 'pagetitle',
-        name: 'product',
-        hiddenName: 'product',
+        name: 'product_id',
+        hiddenName: 'product_id',
         allowBlank: false,
         url: modExtra.config['connector_url'],
         baseParams: {
@@ -253,28 +253,45 @@ modExtra.combo.Options = function(config) {
         name: config.name || 'products',
         anchor:'99%',
         minChars: 2,
+        fieldLabel: _('ms2_product_name'),
+        valueField: 'id',
+        displayField: 'pagetitle',
+        hiddenName: 'products',
+        url: modExtra.config['connector_url'],
         store:new Ext.data.JsonStore({
             id: (config.name || 'products') + '-store',
             root:'results',
             autoLoad: true,
             autoSave: false,
             totalProperty:'total',
-            fields:['value'],
+            fields: ['id', 'pagetitle', 'parents'],
             url: modExtra.config.connector_url,
             baseParams: {
                 action: 'mgr/product/getoptions',
-                key: config.name
+                value: config.name
             },
+            tpl: new Ext.XTemplate('\
+            <tpl for=".">\
+                <div class="x-combo-list-item minishop2-product-list-item" ext:qtip="{pagetitle}">\
+                    <tpl if="parents">\
+                        <span class="parents">\
+                            <tpl for="parents">\
+                                <nobr><small>{pagetitle} / </small></nobr>\
+                            </tpl>\
+                        </span><br/>\
+                    </tpl>\
+                    <span><small>({id})</small> <b>{pagetitle}</b></span>\
+                </div>\
+            </tpl>', {compiled: true}
+            ),
         }),
         mode: 'remote',
-        displayField: 'value',
-        valueField: 'value',
         triggerAction: 'all',
         extraItemCls: 'x-tag',
         expandBtnCls: 'x-form-trigger',
         clearBtnCls: 'x-form-trigger',
         listeners: {
-            newItem: function(bs,v, f) {bs.addItem({tag: v});},
+            newItem: function(bs,v, f) {bs.addItem({products: v});},
         },
         renderTo: Ext.getBody()
     });
