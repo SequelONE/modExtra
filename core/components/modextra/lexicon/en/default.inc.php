@@ -22,6 +22,7 @@ $_lang['modextra_item_enable'] = 'Enable Item';
 $_lang['modextra_items_enable'] = 'Enable Items';
 $_lang['modextra_item_disable'] = 'Disable Item';
 $_lang['modextra_items_disable'] = 'Disable Items';
+$_lang['modextra_item_upload'] = 'Upload Files';
 $_lang['modextra_item_remove'] = 'Remove Item';
 $_lang['modextra_items_remove'] = 'Remove Items';
 $_lang['modextra_item_remove_confirm'] = 'Are you sure you want to remove this Item?';
@@ -66,3 +67,7 @@ $_lang['modextra_category_err_nf'] = 'Category not found.';
 $_lang['modextra_category_err_ns'] = 'Category not specified.';
 $_lang['modextra_category_err_remove'] = 'An error occurred while trying to remove the Category.';
 $_lang['modextra_category_err_save'] = 'An error occurred while trying to save the Category.';
+
+// Товары
+$_lang['modextra_product_name'] = 'Product name';
+$_lang['modextra_products'] = 'Products list';
