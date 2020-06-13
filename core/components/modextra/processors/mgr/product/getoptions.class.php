@@ -21,7 +21,7 @@ class modExtraProductGetOptionsProcessor extends modObjectGetListProcessor
             'limit' => 20,
             'sort' => $this->defaultSortField,
             'dir' => $this->defaultSortDirection,
-            'combo' => false,
+            'combo' => true,
             'query' => '',
         ));
 
@@ -153,6 +153,24 @@ class modExtraProductGetOptionsProcessor extends modObjectGetListProcessor
         }
 
         return $resourceArray;
+    }
+
+    /**
+     * @param xPDOObject $object
+     *
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object)
+    {
+        $data = array();
+        if ($this->getProperty('combo')) {
+            $data = array(
+                'id' => $object->get('id'),
+                'pagetitle' => $object->get('pagetitle'),
+            );
+        }
+
+        return $data;
     }
 
 }

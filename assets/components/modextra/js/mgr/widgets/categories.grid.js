@@ -225,7 +225,7 @@ Ext.extend(modExtra.grid.Categories, MODx.grid.Grid, {
             dataIndex: 'actions',
             renderer: modExtra.utils.renderActions,
             sortable: false,
-            width: 70,
+            width: 150,
             id: 'actions'
         }];
     },

@@ -6,8 +6,20 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     public $classKey = 'modExtraItem';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'DESC';
+    protected $item_id = 0;
     //public $permission = 'list';
 
+    /**
+     * @return bool
+     */
+    public function initialize()
+    {
+        if ($this->getProperty('combo') && !$this->getProperty('limit') && $id = (int)$this->getProperty('id')) {
+            $this->item_id = $id;
+        }
+
+        return true;
+    }
 
     /**
      * We do a special check of permissions
@@ -37,6 +49,20 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
         $c->leftJoin('modExtraCategory', 'modExtraCategory', 'modExtraCategory.id = modExtraItem.category_id');
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
         $c->select(array('modExtraCategory.name as category_name'));
+
+        /*$item = $this->modx->getObject('modExtraItem', 'modExtraItem.id');
+        $productsList = $item->get('products');
+
+        foreach($productsList as $product) {
+            $p = $this->modx->getObject('modResource', $product);
+            $id = $p->get('id');
+            $c->innerJoin('modResource', 'modResource','modResource.id = modExtraItem.products');
+            $c->where(array(
+                'modResource.id' => $id,
+            ));
+            $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
+            $c->select(array('modExtraItem.products as products_name'));
+        }*/
 
         $c->leftJoin('modUser', 'modUser', 'modUser.id = modExtraItem.createdby');
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));

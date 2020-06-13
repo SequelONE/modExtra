@@ -181,8 +181,31 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
         })
     },
 
+    uploadItem: function(btn,e) {
+        if (!this.uploader) {
+            aVer = MODx.config.version.split('.');
+            uploaddialog = ((aVer[0] == 2) && aVer[1] >= 3)? MODx.util.MultiUploadDialog.Dialog : Ext.ux.UploadDialog.Dialog;
+
+            this.uploader = new uploaddialog({
+                title: _('upload'),
+                url: this.config.url,
+                base_params: {
+                    action: 'mgr/item/upload',
+                    docid: modExtra.config.docid
+                },
+                cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
+            });
+            this.uploader.on('hide', this.refresh,this);
+            this.uploader.on('close', this.refresh,this);
+        }
+
+        // Automatically open picker
+        this.uploader.show(btn);
+        this.uploader.buttons[0].input_file.dom.click();
+    },
+
     getFields: function () {
-        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name',  'createdon', 'active', 'actions'];
+        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name', 'products', 'createdon', 'active', 'actions'];
     },
 
     getColumns: function () {
@@ -225,6 +248,11 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             sortable: false,
             width: 150,
         }, {
+            header: _('modextra_products'),
+            dataIndex: 'products',
+            sortable: false,
+            width: 150,
+        }, {
             header: _('modextra_item_user'),
             dataIndex: 'createdby_name',
             sortable: false,
@@ -233,7 +261,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             header: _('modextra_item_createdon'),
             dataIndex: 'createdon',
             sortable: true,
-            width: 200,
+            width: 100,
             renderer: modExtra.utils.renderDateTime,
         }, {
             header: _('modextra_item_active'),
@@ -246,13 +274,19 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             dataIndex: 'actions',
             renderer: modExtra.utils.renderActions,
             sortable: false,
-            width: 100,
+            width: 150,
             id: 'actions'
         }];
     },
 
     getTopBar: function () {
         return [{
+            xtype: 'button',
+            cls: 'primary-button',
+            text: '<i class="icon icon-download"></i> ' + _('modextra_item_upload'),
+            handler: this.uploadItem,
+            scope: this
+        }, {
             text: '<i class="icon icon-cogs"></i> ',
             menu: [{
                 text: '<i class="icon icon-plus"></i> ' + _('modextra_item_create'),

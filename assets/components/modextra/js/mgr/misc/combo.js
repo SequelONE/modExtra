@@ -173,7 +173,8 @@ modExtra.combo.ShopCategory = function (config) {
             compiled: true
         }),
         itemSelector: 'div.minishop2-category-list-item',
-        pageSize: 20,
+        pageSize: 5,
+        emptyText: _('ms2_combo_select'),
         editable: true
     });
     modExtra.combo.ShopCategory.superclass.constructor.call(this, config);
@@ -244,15 +245,15 @@ Ext.extend(modExtra.combo.Product, modExtra.combo.ComboBoxDefault);
 modExtra.combo.Options = function(config) {
     config = config || {};
     Ext.applyIf(config,{
+        id: 'modextra-combo-product-options',
         xtype:'superboxselect',
         allowBlank: true,
         msgTarget: 'under',
         allowAddNewData: true,
         addNewDataOnBlur : true,
         resizable: true,
+        forceSelection: true,
         name: 'products',
-        value:'{products}',
-        dataIndex : 'products',
         anchor:'99%',
         minChars: 1,
         fieldLabel: _('ms2_product_name'),
@@ -260,19 +261,20 @@ modExtra.combo.Options = function(config) {
         displayField: 'pagetitle',
         displayFieldTpl: '{pagetitle} (id: {id})',
         url: modExtra.config['connector_url'],
-        store:new Ext.data.JsonStore({
-            id: (config.name || 'products') + '-store',
-            root:'results',
+        store: new Ext.data.JsonStore({
+            id: (config.name || 'products') + '-options',
+            root: 'results',
             autoLoad: true,
             autoSave: false,
-            totalProperty:'total',
-            fields: ['id', 'pagetitle', 'parents'],
-
+            totalProperty: 'total',
+            fields: ['id', 'pagetitle'],
             url: modExtra.config['connector_url'],
             baseParams: {
                 action: 'mgr/product/getoptions',
+                combo: true,
                 key: config.name
             },
+            valueField: 'pagetitle',
             tpl: new Ext.XTemplate('\
             <tpl for=".">\
                 <div class="x-combo-list-item minishop2-product-list-item" ext:qtip="{pagetitle}">\
@@ -294,12 +296,18 @@ modExtra.combo.Options = function(config) {
         expandBtnCls: 'x-form-trigger',
         clearBtnCls: 'x-form-trigger',
         listeners: {
-            newItem: function(bs,v, f) {bs.addItem({products: v});},
+            newitem: function(bs,v, f) {bs.addItem({products: v});},
+            render: {
+                fn: function (data) {
+                    console.log('Show:', data);
+                    /*Ext.getCmp('modx-panel-resource').getForm().setValues({'inshop[]':['33174','33175']})
+                    MODx.fireResourceFormChange();*/
+                }
+            }
         },
         pageSize: 5,
-        emptyText: _('ms2_combo_select'),
         editable: true,
-        renderTo: Ext.getBody()
+        renderTo: Ext.getBody(),
     });
     config.name += '[]';
     modExtra.combo.Options.superclass.constructor.call(this,config);
