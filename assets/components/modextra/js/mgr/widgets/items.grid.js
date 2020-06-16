@@ -205,7 +205,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
     },
 
     getFields: function () {
-        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name', 'products', 'createdon', 'active', 'actions'];
+        return ['id', 'name', 'description', 'image', 'supports_db', 'category_name', 'createdby_name', 'productsTitle', 'createdon', 'active', 'actions'];
     },
 
     getColumns: function () {
@@ -249,7 +249,7 @@ Ext.extend(modExtra.grid.Items, MODx.grid.Grid, {
             width: 150,
         }, {
             header: _('modextra_products'),
-            dataIndex: 'products',
+            dataIndex: 'productsTitle',
             sortable: false,
             width: 150,
         }, {

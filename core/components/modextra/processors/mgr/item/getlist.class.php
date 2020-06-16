@@ -6,7 +6,7 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     public $classKey = 'modExtraItem';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'DESC';
-    protected $item_id = 0;
+    protected $productsList = [];
     //public $permission = 'list';
 
     /**
@@ -50,23 +50,10 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
         $c->select(array('modExtraCategory.name as category_name'));
 
-        /*$item = $this->modx->getObject('modExtraItem', 'modExtraItem.id');
-        $productsList = $item->get('products');
-
-        foreach($productsList as $product) {
-            $p = $this->modx->getObject('modResource', $product);
-            $id = $p->get('id');
-            $c->innerJoin('modResource', 'modResource','modResource.id = modExtraItem.products');
-            $c->where(array(
-                'modResource.id' => $id,
-            ));
-            $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
-            $c->select(array('modExtraItem.products as products_name'));
-        }*/
-
         $c->leftJoin('modUser', 'modUser', 'modUser.id = modExtraItem.createdby');
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
         $c->select(array('modUser.username as createdby_name'));
+
 
         if ($query) {
             $c->where([
@@ -88,6 +75,20 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     {
         $array = $object->toArray();
         $array['actions'] = [];
+
+        $q = $this->modx->newQuery('modResource');
+        if(!is_array($array['products'])) {
+            $array['products'] = explode(',', $array['products']);
+        }
+        $q->where(array('id:IN' => $array['products']));
+        $q->select(array('pagetitle'));
+        if($q->prepare() && $q->stmt->execute()) {
+            $resources = $q->stmt->fetchAll(PDO::FETCH_ASSOC);
+            $array['productsTitle'] = array_map(function($res){
+                return $res['pagetitle'];
+            },$resources);
+            $array['productsTitle'] = implode(',', $array['productsTitle']);
+        }
 
         // Edit
         $array['actions'][] = [
