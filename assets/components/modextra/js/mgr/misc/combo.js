@@ -244,8 +244,15 @@ modExtra.combo.Product = function (config) {
 Ext.extend(modExtra.combo.Product, modExtra.combo.ComboBoxDefault);
 modExtra.combo.Options = function(config) {
     config = config || {};
+
+    if (config.mode == 'remote') {
+        Ext.applyIf(config, {
+            pageSize: 10,
+            paging: true,
+        });
+    }
+
     Ext.applyIf(config,{
-        id: 'modextra-combo-product-options',
         xtype:'superboxselect',
         allowBlank: true,
         msgTarget: 'under',
@@ -253,13 +260,14 @@ modExtra.combo.Options = function(config) {
         addNewDataOnBlur : true,
         resizable: true,
         forceSelection: true,
-        name: 'products',
+        name: 'products[]',
+        hiddenName: 'products[]',
         anchor:'99%',
         minChars: 1,
         fieldLabel: _('ms2_product_name'),
+        fields: ['id', 'pagetitle', 'parents'],
         valueField: 'id',
         displayField: 'pagetitle',
-        displayFieldTpl: '{pagetitle} (id: {id})',
         url: modExtra.config['connector_url'],
         store: new Ext.data.JsonStore({
             id: (config.name || 'products') + '-options',
@@ -272,9 +280,9 @@ modExtra.combo.Options = function(config) {
             baseParams: {
                 action: 'mgr/product/getoptions',
                 combo: true,
-                key: config.name
+                id: config.value
             },
-            valueField: 'pagetitle',
+            value: 'id',
             tpl: new Ext.XTemplate('\
             <tpl for=".">\
                 <div class="x-combo-list-item minishop2-product-list-item" ext:qtip="{pagetitle}">\
@@ -296,20 +304,13 @@ modExtra.combo.Options = function(config) {
         expandBtnCls: 'x-form-trigger',
         clearBtnCls: 'x-form-trigger',
         listeners: {
-            newitem: function(bs,v, f) {bs.addItem({products: v});},
-            render: {
-                fn: function (data) {
-                    console.log('Show:', data);
-                    /*Ext.getCmp('modx-panel-resource').getForm().setValues({'inshop[]':['33174','33175']})
-                    MODx.fireResourceFormChange();*/
-                }
-            }
+            newItem: function(bs,v, f) {bs.addItem({pagetitle: v});},
         },
         pageSize: 5,
         editable: true,
         renderTo: Ext.getBody(),
     });
-    config.name += '[]';
+    //config.name += '[]';
     modExtra.combo.Options.superclass.constructor.call(this,config);
 };
 Ext.extend(modExtra.combo.Options,Ext.ux.form.SuperBoxSelect);

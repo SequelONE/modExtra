@@ -58,7 +58,8 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
         if ($query) {
             $c->where([
                 'name:LIKE' => "%{$query}%",
-                'OR:category_id:LIKE' => "%{$query}%"
+                'OR:category_id:LIKE' => "%{$query}%",
+                'OR:products:LIKE' => "%{$query}%"
             ]);
         }
 
@@ -78,17 +79,24 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
 
         $q = $this->modx->newQuery('modResource');
         if(!is_array($array['products'])) {
-            $array['products'] = explode(',', $array['products']);
+            $array['products'] = implode(',', $array['products']);
         }
         $q->where(array('id:IN' => $array['products']));
-        $q->select(array('pagetitle'));
+        $q->select(array('id','pagetitle'));
         if($q->prepare() && $q->stmt->execute()) {
             $resources = $q->stmt->fetchAll(PDO::FETCH_ASSOC);
             $array['productsTitle'] = array_map(function($res){
                 return $res['pagetitle'];
             },$resources);
             $array['productsTitle'] = implode(',', $array['productsTitle']);
+            $array['productsIds'] = array_map(function($res){
+                return $res['id'];
+            },$resources);
+            $array['productsIds'] = implode(',', $array['productsIds']);
         }
+
+        $data = $array['products'];
+        $array['products']=$this->modx->toJSON($data);
 
         // Edit
         $array['actions'][] = [

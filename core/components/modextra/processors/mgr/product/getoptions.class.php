@@ -112,6 +112,7 @@ class modExtraProductGetOptionsProcessor extends modObjectGetListProcessor
     {
         $c->select('id,parent,pagetitle,context_key');
         $c->where(array(
+            'parent' => 2,
             'class_key' => 'msProduct',
         ));
 
