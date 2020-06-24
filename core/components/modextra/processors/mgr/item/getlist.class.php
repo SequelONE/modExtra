@@ -6,7 +6,7 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     public $classKey = 'modExtraItem';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'DESC';
-    protected $productsList = [];
+    protected $item_id = 0;
     //public $permission = 'list';
 
     /**
@@ -54,12 +54,10 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
         $c->select(array($this->modx->getSelectColumns('modExtraItem', 'modExtraItem')));
         $c->select(array('modUser.username as createdby_name'));
 
-
         if ($query) {
             $c->where([
                 'name:LIKE' => "%{$query}%",
-                'OR:category_id:LIKE' => "%{$query}%",
-                'OR:products:LIKE' => "%{$query}%"
+                'OR:category_id:LIKE' => "%{$query}%"
             ]);
         }
 
@@ -75,28 +73,22 @@ class modExtraItemGetListProcessor extends modObjectGetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $array = $object->toArray();
-        $array['actions'] = [];
 
         $q = $this->modx->newQuery('modResource');
         if(!is_array($array['products'])) {
-            $array['products'] = implode(',', $array['products']);
+            $array['products'] = explode(',', $array['products']);
         }
         $q->where(array('id:IN' => $array['products']));
-        $q->select(array('id','pagetitle'));
+        $q->select(array('pagetitle'));
         if($q->prepare() && $q->stmt->execute()) {
             $resources = $q->stmt->fetchAll(PDO::FETCH_ASSOC);
             $array['productsTitle'] = array_map(function($res){
                 return $res['pagetitle'];
             },$resources);
             $array['productsTitle'] = implode(',', $array['productsTitle']);
-            $array['productsIds'] = array_map(function($res){
-                return $res['id'];
-            },$resources);
-            $array['productsIds'] = implode(',', $array['productsIds']);
         }
 
-        $data = $array['products'];
-        $array['products']=$this->modx->toJSON($data);
+        $array['actions'] = [];
 
         // Edit
         $array['actions'][] = [

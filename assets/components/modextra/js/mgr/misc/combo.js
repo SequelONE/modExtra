@@ -245,75 +245,77 @@ Ext.extend(modExtra.combo.Product, modExtra.combo.ComboBoxDefault);
 modExtra.combo.Options = function(config) {
     config = config || {};
 
-    if (config.mode == 'remote') {
-        Ext.applyIf(config, {
-            pageSize: 10,
-            paging: true,
-        });
-    }
-
-    Ext.applyIf(config,{
-        xtype:'superboxselect',
-        allowBlank: true,
-        msgTarget: 'under',
-        allowAddNewData: true,
-        addNewDataOnBlur : true,
-        resizable: true,
-        forceSelection: true,
-        name: 'products[]',
-        hiddenName: 'products[]',
-        anchor:'99%',
-        minChars: 1,
-        fieldLabel: _('ms2_product_name'),
-        fields: ['id', 'pagetitle', 'parents'],
-        valueField: 'id',
+    Ext.applyIf(config, {
+        xtype: 'superboxselect',
+        name: 'products',
+        fieldLabel: config['name'] || 'products',
+        hiddenName: config['name'] || 'products',
+        originalName: config['name'] || 'products',
         displayField: 'pagetitle',
-        url: modExtra.config['connector_url'],
+        valueField: 'id',
         store: new Ext.data.JsonStore({
-            id: (config.name || 'products') + '-options',
-            root: 'results',
-            autoLoad: true,
-            autoSave: false,
-            totalProperty: 'total',
-            fields: ['id', 'pagetitle'],
             url: modExtra.config['connector_url'],
             baseParams: {
                 action: 'mgr/product/getoptions',
                 combo: true,
                 id: config.value
             },
-            value: 'id',
-            tpl: new Ext.XTemplate('\
-            <tpl for=".">\
-                <div class="x-combo-list-item minishop2-product-list-item" ext:qtip="{pagetitle}">\
-                    <tpl if="parents">\
-                        <span class="parents">\
-                            <tpl for="parents">\
-                                <nobr><small>{pagetitle} / </small></nobr>\
-                            </tpl>\
-                        </span><br/>\
-                    </tpl>\
-                    <span><small>({id})</small> <b>{pagetitle}</b></span>\
-                </div>\
-            </tpl>', {compiled: true}
-            ),
+            root: 'results',
+            totalProperty: 'total',
+            autoLoad: true,
+            autoSave: false,
+            fields: ['id', 'pagetitle'],
         }),
-        mode: 'remote',
-        triggerAction: 'all',
-        extraItemCls: 'x-tag',
-        expandBtnCls: 'x-form-trigger',
-        clearBtnCls: 'x-form-trigger',
-        listeners: {
-            newItem: function(bs,v, f) {bs.addItem({pagetitle: v});},
-        },
-        pageSize: 5,
+        minChars: 2,
         editable: true,
-        renderTo: Ext.getBody(),
+        resizable: true,
+        typeAhead: false,
+        allowBlank: true,
+        forceFormValue: false,
+        allowAddNewData: true,
+        addNewDataOnBlur: true,
+        forceSameValueQuery: true,
+        triggerAction: 'all',
+        pageSize: 15,
+        anchor: '100%',
+        extraItemCls: 'x-tag',
+        clearBtnCls: 'x-form-trigger',
+        expandBtnCls: 'x-form-trigger',
+        listEmptyText: '<div style="padding: 7px;">No results...</div>',
+        tpl: new Ext.XTemplate('\
+            <tpl for="."><div class="x-combo-list-item">\
+                <span>\
+                    {pagetitle}\
+                </span>\
+            </div></tpl>',
+            {compiled: true}
+        ),
     });
-    //config.name += '[]';
+    ['name', 'hiddenName', 'originalName'].forEach(function (name) {
+        config[name] += '[]';
+    });
     modExtra.combo.Options.superclass.constructor.call(this,config);
+
+    this.on('newitem', function (combo, val) {
+        combo.addItem({id: val, pagetitle: val});
+    }, this);
 };
-Ext.extend(modExtra.combo.Options,Ext.ux.form.SuperBoxSelect);
+Ext.extend(modExtra.combo.Options, Ext.ux.form.SuperBoxSelect, {
+    initValue: function () {
+        let sbs = this;
+        window.setTimeout(function () {
+            if (Ext.isObject(sbs.value) || Ext.isArray(sbs.value)) {
+                sbs.setValueEx(sbs.value);
+                sbs.originalValue = sbs.getValue();
+            } else {
+                Ext.ux.form.SuperBoxSelect.superclass.initValue.call(sbs);
+            }
+            if (sbs.mode === 'remote') {
+                sbs.setOriginal = true;
+            }
+        }, 700);
+    },
+});
 Ext.reg('modextra-combo-combobox-default', modExtra.combo.ComboBoxDefault);
 Ext.reg('modextra-combo-user',MODx.combo.User);
 Ext.reg('modextra-combo-shopcategory', modExtra.combo.ShopCategory);

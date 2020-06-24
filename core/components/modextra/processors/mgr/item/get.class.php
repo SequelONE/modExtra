@@ -25,11 +25,34 @@ class modExtraItemGetProcessor extends modObjectGetProcessor
 
     public function cleanup()
     {
-        $array = $this->object->toArray();
-        if(!empty($array['products'])) {
-            $array['products'] = implode(',', $array['products']);
+        $data = $this->object->toArray();
+
+        //
+        if(!empty($data['products'])) {
+            //
+            $data['products'] = is_array($data['products'])
+                ? $data['products']
+                : explode(',', $data['products']);
+            $data['products[]'] = [];
+
+            //
+            $q = $this->modx->newQuery('msProduct')
+                ->select('id, pagetitle')
+                ->where([
+                    'id:IN' => $data['products'],
+                ])
+                ->sortby('FIELD(id, ' . join(',', $data['products']) . ')', '')
+            ;
+            if ($q->prepare()->execute()) {
+                $data['products'] = [];
+                foreach (($q->stmt->fetchAll(PDO::FETCH_ASSOC) ?: []) as $v) {
+                    $data['products'][] = $v['pagetitle'];
+                    $data['products[]'][] = $v;
+                }
+            }
         }
 
+        //
         $products = $this->modx->fromJSON($this->getProperty('products', "[]"));
         foreach ($products as $key) {
             $rows = array();
@@ -44,10 +67,12 @@ class modExtraItemGetProcessor extends modObjectGetProcessor
             if ($c->prepare() && $c->stmt->execute()) {
                 $rows = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
             }
-            $array = array_merge($array, array($key => $rows));
+            $data = array_merge($data, array($key => $rows));
         }
 
-        return $this->success('', $array);
+        $this->modx->log(1, 'modExtraItemGetProcessor $data ' . print_r($data, 1));
+
+        return $this->success('', $data);
     }
 
 }

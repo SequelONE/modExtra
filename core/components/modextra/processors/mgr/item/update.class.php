@@ -41,8 +41,6 @@ class modExtraItemUpdateProcessor extends modObjectUpdateProcessor
             $this->modx->error->addField('name', $this->modx->lexicon('modextra_item_err_ae'));
         }
 
-        //$this->setProperty('products', implode(',', $this->getProperty('products')));
-
         return parent::beforeSet();
     }
 }
